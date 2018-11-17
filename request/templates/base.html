@@ -83,7 +83,6 @@
   })
   })
   var SendToServer = function(url, method, component, data={}){
-    const csrfToken = getCookie('csrftoken');
     const headers = new Headers({
       "Accept": "application/json",
       "X-CSRF-TOKEN": csrfToken,
