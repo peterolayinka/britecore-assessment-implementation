@@ -9,5 +9,7 @@ services:
       - ./env/local.env
     expose:
       - '5000'
+    ports:
+      - "5000:5000"
     entrypoint: compose/docker-entrypoint.sh
     restart: always
