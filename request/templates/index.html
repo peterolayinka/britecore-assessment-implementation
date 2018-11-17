@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+{% block main_content %}
+<div class="ui container">
+
+  <h1>Feature Request App</h1>
+
+  <div class="ui secondary pointing menu">
+    <a class="active item">Home</a>
+    <div class="right menu">
+      <a class="ui item">Logout</a>
+    </div>
+  </div>
+  <div id="app">
+    <div class="ui segment">
+        <!-- <div class="ui form loading"> -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        <form method="POST" v-on:submit.prevent="onSubmit" v-bind:class="{loading: loading}" class="ui form {% if messages %}{% for category, message in messages %}{{category}}{% endfor %}{% endif %}">
+          {{ request_form.hidden_tag() }}
+          <div class="fields">
+            <div class="field">
+              <label>Client</label>
+              <select name="client" class="ui search dropdown" v-model="clientName">
+                <option v-for="client in clientNames" v-bind:value="client.id" :key="client.id">
+                  $[ client.name ]$ ($[ client.requests ]$)
+                </option>
+              </select>
+            </div>
+            <div class="field {% if request_form.title.errors %}error{% endif %}">
+              <label>Title
+                {% for error in request_form.title.errors %}
+                  <span class="ui pointing below basic red label">{{ error }}</span>
+                {% endfor %}
+              </label>
+              <input name="title" type="text" v-model="title">
+            </div>
+            <div class="field {% if request_form.priority.errors %}error{% endif %}">
+              <label>Priority
+                {% for error in request_form.priority.errors %}
+                  <span class="ui pointing below basic red label">{{ error }}</span>
+                {% endfor %}
+              </label>
+              <input name="priority" type="number" v-model="priority">
+            </div>
+            <div class="field {% if request_form.target_date.errors %}error{% endif %}">
+              <label>Target Date
+                {% for error in request_form.target_date.errors %}
+                  <span class="ui pointing below basic red label">{{ error }}</span>
+                {% endfor %}
+              </label>
+              <input name="target_date" type="date" v-model="targetDate">
+            </div>
+            <div class="field {% if request_form.product.errors %}error{% endif %}">
+              <label>Product
+                {% for error in request_form.product.errors %}
+                  <span class="ui pointing below basic red label">{{ error }}</span>
+                {% endfor %}
+              </label>
+              <select name="product" class="ui search dropdown" v-model="product">
+                <option v-for="product in products" v-bind:value="product[0]" :key="product[0]">
+                  $[ product[1] ]$
+                </option>
+              </select>
+            </div>
+          </div>
+          <div class="fields {% if request_form.description.errors %}error{% endif %}">
+            <div class="eight wide field">
+              <label>Description
+                {% for error in request_form.description.errors %}
+                  <span class="ui pointing below basic red label">{{ error }}</span>
+                {% endfor %}
+              </label>
+              <textarea name="description" v-model="description"></textarea>
+            </div>
+          </div>
+          <button class="ui orange submit button right floated">Submit</button>
+          <br>
+          <br>
+          <br>
+
+          {% if messages %}
+          {% for category, message in messages %}
+          <div class="ui {{category}} message" style="text-align: center;">
+              <div class="header"><i class="icon big {% if category == 'success' %}smile{% else %}frown{% endif %} outline"></i>{% if category == 'success' %}Successful{% else %}Error{% endif %}</div>
+              <p>{{ message }}</p>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </form>
+        {% endwith %}
+      
+        <h4 class="ui horizontal divider header">
+          <i class="tag icon"></i>
+          Request Recorded
+        </h4>
+      
+        <table class="ui very basic celled table full-width">
+          <thead>
+            <tr><th>Client Name</th>
+            <th>Request Information</th>
+          </tr></thead>
+          <tbody>
+            {% for client in clients %}
+            <tr>
+              <td>
+                <h4 class="ui image header">
+                  <i class="user outline icon"></i>
+                  <div class="content">
+                    {{client.name}}
+                    <!-- <div class="sub header">Human Resources
+                  </div> -->
+                </div>
+              </h4></td>
+              <td>
+                {% for request in client.request %}
+                <div style="margin-bottom:5px">
+                  <span style="margin-bottom:2px" class="ui small blue tag label">Title</span> {{request.title}}
+                  <span style="margin-bottom:2px" class="ui small blue tag label">Priority</span> {{request.priority}}
+                  <span style="margin-bottom:2px" class="ui small blue tag label">Product</span> {{request.product.name}}
+                  <span style="margin-bottom:2px" class="ui small blue tag label">Target Date</span> {{request.target_date}}
+                  <span style="margin-bottom:2px" class="ui small blue tag label">Description</span> {{request.description}}
+                </div>
+                <div class="ui horizontal divider header">&nbsp;</div>
+                {% endfor %}
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>
+{% endblock %}
