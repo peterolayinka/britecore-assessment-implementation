@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: compose/Dockerfile
+    env_file:
+      - ./env/local.env
+    expose:
+      - '5000'
+    entrypoint: compose/docker-entrypoint.sh
+    restart: always
