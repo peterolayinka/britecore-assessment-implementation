@@ -60,6 +60,11 @@ That is all.
 #wink ;)
 ```
 
+## Approach to Problem
+if a user input a request with a priority aleady on an existing request, i increment every request from that priority number and above so my new request can use the priority of choice. that way we can never have two request with same priority number.
+
+since feature priority is directly proportional to number of requests then if a user types in a priority above the current number of request in the system, the request priority will be the `number of total request + 1`. 
+
 ## Running the tests
 
 run tests by using the command at the application root directory
