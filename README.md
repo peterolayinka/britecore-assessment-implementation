@@ -1,6 +1,6 @@
 # Project Title
 
-This a web application that allows the user to create "feature requests".
+This a web application that allows users to create "feature requests".
 
 A "feature request" is a request for a new feature that will be added onto an existing piece of software. Assume that the user is an employee at IWS who would be entering this information after having some correspondence with the client that is requesting the feature
 
