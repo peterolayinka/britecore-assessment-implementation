@@ -42,7 +42,7 @@ migrate and update the changes to your database with commands below
 `flask db upgrade`
 
 ```
-create sample client from python shell
+create sample clients from python shell
 ```
 
 ```
@@ -76,15 +76,16 @@ include all neccessary credentials like (database, hosting of static files *opti
 
 `fab update_app`
 
-`fab docker up`
+`fab docker_up`
 
 ## Demo
-<http://sandbox.quizboot.com:5000/dev/>
+<http://sandbox.quizboot.com:5000/>
 
 ## Built With
 
 * [Flask](http://flask.pocoo.org/) - The web framework used
 * [AWS (Rds, Ec2)](https://s3.console.aws.amazon.com/) - Hosting Platform
+* [Gunicorn](https://gunicorn.org/) -  Python WSGI HTTP Server for UNIX
 * [Fabric](http://www.fabfile.org/) - Auto Deploy tool
 * [Vue.js](https://vuejs.org/) - Javascript framework
 * [Jquery](https://jquery.com/) - Javascript framework

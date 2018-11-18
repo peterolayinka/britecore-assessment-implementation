@@ -38,6 +38,9 @@ def docker_down():
 def docker_logs():
     goto_dir_add_execute(run, f'{docker_compose} logs --follow')
 
+def docker_shell():
+    goto_dir_add_execute(run, f'{docker_compose} exec web bash')
+
 def pull_and_build_image():
     git_pull()
     docker_build()
