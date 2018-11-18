@@ -3,6 +3,7 @@ asn1crypto==0.24.0
 atomicwrites==1.2.1
 attrs==18.2.0
 bcrypt==3.1.4
+boto==2.49.0
 cffi==1.11.5
 Click==7.0
 cryptography==2.4.1
