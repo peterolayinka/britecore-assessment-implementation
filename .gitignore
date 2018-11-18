@@ -2,5 +2,4 @@ startup.sh
 /venv
 test.db
 __pycache__
-README.md
 .pytest_cache
