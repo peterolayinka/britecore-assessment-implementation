@@ -5,8 +5,8 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: testusr
-      POSTGRES_USER: password
+      POSTGRES_PASSWORD: password
+      POSTGRES_USER: testusr
       POSTGRES_DB: testdb
     ports:
       - '5432:5432'
