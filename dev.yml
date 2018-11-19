@@ -5,9 +5,9 @@ services:
     image: postgres
     restart: always
     environment:
-      POSTGRES_PASSWORD: ${USER}
-      POSTGRES_USER: ${PASSWORD}
-      POSTGRES_DB: ${DB}
+      POSTGRES_PASSWORD: testusr
+      POSTGRES_USER: password
+      POSTGRES_DB: testdb
     ports:
       - '5432:5432'
     volumes:
