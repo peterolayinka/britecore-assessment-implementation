@@ -106,21 +106,32 @@
                   <i class="user outline icon"></i>
                   <div class="content">
                     {{client.name}}
-                    <!-- <div class="sub header">Human Resources
-                  </div> -->
-                </div>
-              </h4></td>
+                  </div>
+                </h4>
+              </td>
               <td>
-                {% for request in client.request %}
-                <div style="margin-bottom:5px">
-                  <span style="margin-bottom:2px" class="ui small blue tag label">Title</span> {{request.title}}
-                  <span style="margin-bottom:2px" class="ui small blue tag label">Priority</span> {{request.priority}}
-                  <span style="margin-bottom:2px" class="ui small blue tag label">Product</span> {{request.product.name}}
-                  <span style="margin-bottom:2px" class="ui small blue tag label">Target Date</span> {{request.target_date}}
-                  <span style="margin-bottom:2px" class="ui small blue tag label">Description</span> {{request.description}}
-                </div>
-                <div class="ui horizontal divider header">&nbsp;</div>
-                {% endfor %}
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Priority</th>
+                      <th>Product</th>
+                      <th>Target</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for request in client.request %}
+                    <tr style="margin-bottom:5px">
+                      <td>{{request.title}}</td>
+                      <td>{{request.priority}}</td>
+                      <td>{{request.product.name}}</td> 
+                      <td>{{request.target_date}}</td> 
+                      <td>{{request.description}}</td> 
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
               </td>
             </tr>
             {% endfor %}

@@ -5,6 +5,7 @@ from datetime import date
 
 from request import app, db, models
 from request.models import Request, Client, ProductEnum
+from config.settings import basedir
 
 
 class BucketlistTestCase(unittest.TestCase):
@@ -14,6 +15,7 @@ class BucketlistTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = app
         self.app.config['TESTING'] = True
+        self.app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'test.db')
         self.app.config['WTF_CSRF_ENABLED'] = False
         self.client = self.app.test_client
         self.request = {
@@ -68,6 +70,20 @@ class BucketlistTestCase(unittest.TestCase):
         self.assertEqual(Request.query.get(3).priority, 5)
         self.assertEqual(Request.query.count(), 6)
         self.assertEqual(res.status_code, 302)
+
+    def test_no_duplicate_if_priority_on_new_request_is_equal_to_all_request_count(self):
+        self.create_test_client_and_request()
+        self.assertEqual(Request.query.count(), 4)
+        self.assertEqual(Request.query.get(1).title, 'title 1')
+        self.assertEqual(Request.query.get(1).priority, 1)
+        self.request.update({'priority':4})
+        res = self.client().post('/', data=self.request)
+        self.assertEqual(Request.query.get(1).priority, 1)
+        self.assertEqual(Request.query.get(2).priority, 2)
+        self.assertEqual(Request.query.get(3).priority, 3)
+        self.assertEqual(Request.query.get(4).priority, 5)
+        self.assertEqual(Request.query.get(5).priority, 4)
+        self.assertEqual(Request.query.count(), 5)
     
     def test_requests_does_not_reordered_if_priority_on_new_request_is_not_set(self):
         self.create_test_client_and_request()

@@ -20,7 +20,7 @@ def index():
             priority = request_form.priority.data
             request_count = models.Request.query.filter(
                         models.Request.client_id==request_form.client.data).count()
-            if priority >= request_count:
+            if priority >= request_count+1:
                 priority = request_count + 1
 
             new_request = models.Request(
